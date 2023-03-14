@@ -1,0 +1,25 @@
+id: 4dc5ffff-63b9-4ede-ab0a-1d3cbf75162c
+timestamp: 2023-03-14T14:35:21Z
+username: guest
+source: TAP-GUI
+accelerator:
+  name: angular-frontend-2
+  git:
+    url: https://github.com/sarahwalther/application-accelerator-samples
+    subPath: angular-frontend
+    ref:
+      branch: fix-angular-sso-configs
+    commit: e57894a1af2ed241dd5290020387697149619954
+fragments:
+  - name: tap-workload
+    source:
+      image: gcr.io/cf-identity-service-oak/tap-packages/1.5.0-build.37@sha256:dbf0dedb6848ad8a7704c1c19465a1ddae9039b0e63c1dd0df3e2ed9cbda6093
+options:
+  artifactId: angular-frontend
+  authority: https://sso.authservers.sarah.identity.team
+  authorityLabelKey: name
+  authorityLabelValue: sso
+  backendService: customer-profile-backend.showcase
+  namespace: showcase
+  projectName: angular-frontend-2
+  useSingleSignOn: true

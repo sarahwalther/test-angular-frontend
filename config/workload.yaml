@@ -1,0 +1,37 @@
+apiVersion: carto.run/v1alpha1
+kind: Workload
+metadata:
+  name: angular-frontend
+  labels:
+    apps.tanzu.vmware.com/workload-type: web
+    app.kubernetes.io/part-of: angular-frontend
+    apps.tanzu.vmware.com/has-tests: "true"
+spec:
+  params:
+  - name: clusterBuilder
+    value: "base"
+  - name: annotations
+    value:
+      autoscaling.knative.dev/minScale: "1"
+  build:
+    env:
+      - name: BP_NODE_RUN_SCRIPTS
+        value: "build"
+      - name: BP_WEB_SERVER_ROOT
+        value: "dist"
+  source:
+    git:
+      url: https://github.com/sarahwalther/test-angular-frontend.git
+      ref:
+        branch: main
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: angular-frontend
+  namespace: #@ data.values.client.namespace
+  annotations:
+    kapp.k14s.io/change-rule.clientregistration: "upsert after upserting clientregistration"
+    kapp.k14s.io/change-rule.java-rest-service: "upsert after upserting java-rest-service"
+    kapp.k14s.io/exists: ""
+    kapp.k14s.io/change-group: workload

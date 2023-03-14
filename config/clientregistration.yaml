@@ -1,0 +1,21 @@
+apiVersion: sso.apps.tanzu.vmware.com/v1alpha1
+kind: ClientRegistration
+metadata:
+  name: angular-frontend
+spec:
+  authServerSelector:
+    matchLabels:
+      name: sso
+  authorizationGrantTypes:
+    - authorization_code
+  clientAuthenticationMethod: none
+  redirectURIs:
+    - #@ "https://angular-frontend.{namespace}.{domain}".format(namespace=data.values.client.namespace, domain=data.values.domain_name)
+    - #@ "https://angular-frontend.{namespace}.{domain}/user-profile".format(namespace=data.values.client.namespace, domain=data.values.domain_name)
+    - #@ "https://angular-frontend.{namespace}.{domain}/customer-profiles/list".format(namespace=data.values.client.namespace, domain=data.values.domain_name)
+  scopes:
+    - name: openid
+    - name: email
+    - name: profile
+    - name: message.read
+    - name: message.write

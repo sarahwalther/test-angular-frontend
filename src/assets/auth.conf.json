@@ -1,0 +1,5 @@
+{
+  "authority": "https://sso.authservers.sarah.identity.team",
+  "clientId": "showcase_angular-frontend",
+  "scope": [ "openid", "profile", "email", "message.read", "message.write" ]
+}
