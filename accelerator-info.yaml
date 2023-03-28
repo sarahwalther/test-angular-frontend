@@ -1,0 +1,17 @@
+id: 4a0fedab-16d1-4b9d-a7b5-56ec54fc1001
+timestamp: 2023-03-28T19:51:34Z
+username: guest
+source: TAP-GUI
+accelerator:
+  name: angular-frontend
+  source:
+    image: gcr.io/cf-identity-service-oak/tap-packages/1.5.0-rc.6@sha256:600ef09ebb281401f2d12336b70da7c47274222f1dbf201f5ade4beaf1211f13
+fragments:
+  - name: tap-workload
+    source:
+      image: gcr.io/cf-identity-service-oak/tap-packages/1.5.0-rc.6@sha256:dbf0dedb6848ad8a7704c1c19465a1ddae9039b0e63c1dd0df3e2ed9cbda6093
+options:
+  artifactId: angular-frontend-no-sso
+  backendService: java-rest-service.showcase
+  projectName: angular-frontend-no-sso
+  useSingleSignOn: false
